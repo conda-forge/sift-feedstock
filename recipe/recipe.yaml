@@ -1,34 +1,36 @@
-{% set name = "sift" %}
-{% set version = "0.9.0" %}
+schema_version: 1
+
+context:
+  version: 0.9.0
 
 package:
-  name: {{ name|lower }}
-  version: {{ version }}
+  name: sift
+  version: ${{ version }}
 
 source:
-  url: https://github.com/svent/sift/archive/v{{ version }}.tar.gz
+  url: https://github.com/svent/sift/archive/v${{ version }}.tar.gz
   sha256: bbbd5c472c36b78896cd7ae673749d3943621a6d5523d47973ed2fc6800ae4c8
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
-    - {{ compiler('go-nocgo') }}
+    - ${{ compiler('go-nocgo') }}
     - go-licenses
 
-test:
-  commands:
-    - sift --help
+tests:
+  - script:
+      - sift --help
 
 about:
-  home: https://github.com/svent/sift
   license: GPL-3.0-only
   license_file:
     - LICENSE
     - license-files/
   summary: Fast and powerful open source alternative to grep
-  dev_url: https://github.com/svent/sift
+  homepage: https://github.com/svent/sift
+  repository: https://github.com/svent/sift
 
 extra:
   recipe-maintainers:
